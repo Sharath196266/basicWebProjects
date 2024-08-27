@@ -6,7 +6,8 @@ let m=document.querySelector("#msg");
 let h=document.querySelector(".hid");
 let turno = true;//player o / x
 let count = 0; //to track Draw
-
+let winnerList=[]; //to track winners
+let res=document.querySelector("#wl");
 const arr=[
         [0,1,2],
         [0,3,6],
@@ -50,10 +51,15 @@ boxes.forEach((box) => {
         }
     });
 });
+const dis=()=>{
+    res.innerText=winnerList;
+};
 const gameDraw = () => {
     m.innerText="Game is Draw.";
     msgCon.classList.remove("hide");
     h.classList.add("hid");
+    winnerList.push("D");
+    dis();
     disableboxes();
 };
 const disableboxes=() =>{
@@ -86,11 +92,13 @@ const checkwinner = () =>{
             {
             console.log("Winner",p1);
             showWinner(p1);
+            winnerList.push(p1);
+            dis();
             return true;
             }
         }
     }
 };
-
+ 
 newbtn.addEventListener("click", resetG);
 resetBtn.addEventListener("click", resetG);
